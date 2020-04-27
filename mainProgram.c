@@ -9,6 +9,22 @@ struct edge
 };
 typedef struct edge edge;
 
+
+void printGraph(Gnode *temp)
+{
+    Nnode *ntemp;
+    while(temp!=NULL)
+    {
+        ntemp=temp->Nlist;
+        printf("\n NODE %c : ",temp->data);
+        while (ntemp!=NULL)
+        {
+            printf("-> %c ",ntemp->Gadd->data);
+            ntemp=ntemp->next;
+        }
+        temp=temp->next;
+    }
+}
 void attachGnode(Gnode *node)
 {
     if (start==NULL)
@@ -100,11 +116,19 @@ int main()
     edge g1[4]={{'A','B'},{'A','C'},{'B','A'},{'B','C'}};
 
     addEdge(g1[0]);
-    printf("\n %d",start);
-    printf("\n%c",start->data);
-    printf("\n%d",start->next);
-    printf("\n%d",start->Nlist);
-    printf("\n%d",start->Nlist->next);
-    printf("\n%d",start->Nlist->Gadd);
-    printf("\n%c",start->Nlist->Gadd->data);
+    addEdge(g1[1]);
+    addEdge(g1[2]);
+    addEdge(g1[3]);
+    /*
+        printf("\n %d",start);
+        printf("\n%c",start->data);
+        printf("\n%d",start->next);
+        printf("\n%d",start->Nlist);
+        printf("\n%d",start->Nlist->next);
+        printf("\n%d",start->Nlist->Gadd);
+        printf("\n%c",start->Nlist->Gadd->data);
+    */
+
+    printGraph(start);
+    printf("\n");
 }
