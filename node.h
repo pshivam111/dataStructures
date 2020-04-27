@@ -2,17 +2,17 @@ struct Nnode;
 
 struct Gnode
 {
-    int data;
-    struct Nnode *list;
+    char data;
+    struct Nnode *Nlist;
     struct Gnode *next; 
 };
 typedef struct Gnode Gnode;
 
-Gnode start;
+Gnode *start;
 
 struct Nnode
 {
-    struct Gnode *add;
+    struct Gnode *Gadd;
     struct Nnode *next;
 };
 typedef struct Nnode Nnode;
