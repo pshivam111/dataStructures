@@ -13,6 +13,7 @@ Gnode *start;
 struct Nnode
 {
     struct Gnode *Gadd;
+    int weight;
     struct Nnode *next;
 };
 typedef struct Nnode Nnode;
