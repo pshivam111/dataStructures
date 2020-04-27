@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include"node.h"
 
 struct edge
@@ -41,7 +42,7 @@ void addNeighbour(Gnode *a, Gnode *b)
     
     
 }
-Nnode *createGnode(char c)
+Gnode *createGnode(char c)
 {
     Gnode *temp =(Gnode *) malloc(sizeof(Gnode));
     temp->data=c;
@@ -65,9 +66,8 @@ Gnode *searchGnode(char c)
     
     }
     
-    
 }
-Gnode *addGnode(edge e)
+void  addEdge(edge e)
 {
     //search for a note with data = e.from
     Gnode *firstnode,*secondnode;;
@@ -89,18 +89,22 @@ Gnode *addGnode(edge e)
 
     //if it exist then store its address if dosen exist then create node 
     //and store data.
-
     //search for a node with data =e.to
-
     //if it exists then store its address if dosent exist then creat node
     //and store data
     
-
     //if both are not null then add to node in the neighbour list of from node
 }
 int main()
 {
     edge g1[4]={{'A','B'},{'A','C'},{'B','A'},{'B','C'}};
 
-    
+    addEdge(g1[0]);
+    printf("\n %d",start);
+    printf("\n%c",start->data);
+    printf("\n%d",start->next);
+    printf("\n%d",start->Nlist);
+    printf("\n%d",start->Nlist->next);
+    printf("\n%d",start->Nlist->Gadd);
+    printf("\n%c",start->Nlist->Gadd->data);
 }
