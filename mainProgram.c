@@ -9,7 +9,17 @@ struct edge
 };
 typedef struct edge edge;
 
-
+Gnode *getGadd(char c)
+{
+    Gnode *temp=start;
+    while (temp)
+    {
+        temp=temp->next;
+        if(temp->data=c)
+            break;
+    }
+    return temp;
+}
 void printGraph(Gnode *temp)
 {
     Nnode *ntemp;
@@ -110,6 +120,62 @@ void  addEdge(edge e)
     //and store data
     
     //if both are not null then add to node in the neighbour list of from node
+}
+void deleteGnode(Gnode *a)
+{
+    Gnode *mover=start;
+    Nnode *m1,*m2;
+    while(mover)
+    {
+        if(mover==a)
+        {
+            Gnode *temp=mover;
+            mover=mover->next;
+            m1=temp->Nlist;
+            free(temp);
+            m2=m1;
+            m1=m1->next;
+            while (m1)
+            {
+                free(m2);
+                m2=m1;
+                m1=m1->next;
+            }
+            free(m2);
+        }
+        else
+        {
+            m1=mover->Nlist;
+            while(m1->next->Gadd!=a&&m1)
+            {
+                m1=m1->next;
+            }
+            m2=m1->next;
+            m1->next=m1->next->next;
+            free(m2);
+            mover=mover->next;
+        }
+        
+    }
+    
+    
+}
+
+void deleteNode(char c)
+{
+    deleteGnode(getGadd(c))
+}
+void deleteEdge(char from, char to)
+{
+    Gnode *temp=getGadd(from);
+    Nnode *mover=temp->Nlist;
+    while (mover->next->Gadd->data!=to)
+    {
+        mover=mover->next;
+    }
+    Nnode *del=mover->next;
+    mover=mover->next->next;
+    free(del);    
 }
 int main()
 {
