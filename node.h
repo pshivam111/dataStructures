@@ -18,5 +18,10 @@ struct Nnode
 };
 typedef struct Nnode Nnode;
 
-
+struct edge
+{
+    char from;
+    char to;
+};
+typedef struct edge edge;
 
