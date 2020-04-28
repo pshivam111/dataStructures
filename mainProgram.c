@@ -11,22 +11,29 @@ typedef struct edge edge;
 
 Gnode *getGadd(char c)
 {
+    // printf("\n Get address function and function parameter is : %c ", c);
     Gnode *temp=start;
+    
     while (temp)
     {
-        temp=temp->next;
-        if(temp->data=c)
+        // printf("\n in loop %c", temp->data);
+        if(temp->data==c)
             break;
+        temp=temp->next;
     }
+    // printf("\n Get address function over and temp data is : %c", temp->data);
     return temp;
 }
 void printGraph(Gnode *temp)
 {
+    printf("\n printGraph function");
     Nnode *ntemp;
+
     while(temp!=NULL)
     {
-        ntemp=temp->Nlist;
         printf("\n NODE %c : ",temp->data);
+
+        ntemp=temp->Nlist;
         while (ntemp!=NULL)
         {
             printf("-> %c ",ntemp->Gadd->data);
@@ -35,6 +42,8 @@ void printGraph(Gnode *temp)
         temp=temp->next;
     }
 }
+
+
 void attachGnode(Gnode *node)
 {
     if (start==NULL)
@@ -48,6 +57,8 @@ void attachGnode(Gnode *node)
         temp->next->next=NULL;
     }
 }
+
+
 void addNeighbour(Gnode *a, Gnode *b)
 {
     Nnode *node=(Nnode *)malloc(sizeof(Nnode)),*temp;
@@ -68,12 +79,18 @@ void addNeighbour(Gnode *a, Gnode *b)
     
     
 }
+
+
 Gnode *createGnode(char c)
 {
     Gnode *temp =(Gnode *) malloc(sizeof(Gnode));
     temp->data=c;
+    temp->next=NULL;
+    temp->Nlist=NULL;
     return  temp;
 }
+
+
 Gnode *searchGnode(char c)
 {
     if (start==NULL)
@@ -89,9 +106,7 @@ Gnode *searchGnode(char c)
                 temp=temp->next;     
         }
         return temp;
-    
     }
-    
 }
 void  addEdge(edge e)
 {
@@ -163,19 +178,45 @@ void deleteGnode(Gnode *a)
 
 void deleteNode(char c)
 {
-    deleteGnode(getGadd(c))
+    deleteGnode(getGadd(c));
 }
 void deleteEdge(char from, char to)
 {
+    // printf("\n from %c  to %c",from,to );
+    // printf("\n Edge deletion function");
+
     Gnode *temp=getGadd(from);
+    Gnode *toAdd=getGadd(to);
+    if(temp==NULL)
+        printf(" Address is NULL");
+    // printf("\n Address recieved from getGadd function");
+    // printf("\n temp data %c",temp->data);
+    // printf("\n toAdd data %c",toAdd->data);
+    
+
     Nnode *mover=temp->Nlist;
-    while (mover->next->Gadd->data!=to)
+    /*
+    if (mover==NULL)
+        printf("\n Its NULL");
+    else
+        printf("\n Not NULL");
+    */
+    // printf("\n delay");
+    if(mover->next ==NULL)
     {
-        mover=mover->next;
+        free(mover); temp->Nlist=NULL;
     }
-    Nnode *del=mover->next;
-    mover=mover->next->next;
-    free(del);    
+    else
+    {    
+        while (mover->next->Gadd->data!=to)
+        {
+            
+            mover=mover->next;
+        }
+        Nnode *del=mover->next;
+        mover->next=mover->next->next;
+        free(del); 
+    }   
 }
 int main()
 {
@@ -185,6 +226,8 @@ int main()
     addEdge(g1[1]);
     addEdge(g1[2]);
     addEdge(g1[3]);
+    printGraph(start);
+    // printf("\n 1");
     /*
         printf("\n %d",start);
         printf("\n%c",start->data);
@@ -194,7 +237,18 @@ int main()
         printf("\n%d",start->Nlist->Gadd);
         printf("\n%c",start->Nlist->Gadd->data);
     */
-
+   
+    deleteEdge('A','C');
     printGraph(start);
-    printf("\n");
+    // printf("\n 2");
+    deleteEdge('A','B');
+    printGraph(start);
+    // printf("\n 3");
+    deleteEdge('B','C');
+    // printf("\n Edge deleted");
+    printGraph(start);
+    // printf("\n 4");
+    deleteEdge('B','A');
+    printGraph(start);
+    // printf("\n5");
 }
