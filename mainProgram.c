@@ -1,7 +1,13 @@
 #include<stdio.h>
+#include<stack.h>
+#include<queue.h>
 #include<stdlib.h>
 #include"node.h"
 #include"graphFunctions.h"
+void deapthFirstSearchPrint( Gnode *a)
+{
+
+}
 int main()
 {
     edge g1[8]={{'A','B'},{'A','C'},{'B','A'},{'B','C'},{'C','B'},{'D','A'},{'D','B'},{'D','C'}};
@@ -15,8 +21,6 @@ int main()
     addEdge(g1[6]);
     addEdge(g1[7]);
     printGraph(start);
-
-
 
 deleteNode('D');
 
