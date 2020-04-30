@@ -5,6 +5,7 @@
 
 void clearNeighbour(Gnode *node)
 {
+    // printf("\n Clear neighbour function called ");
     if(node!=NULL)
     {
         Nnode *m1,*m2;
@@ -15,35 +16,44 @@ void clearNeighbour(Gnode *node)
             m1=m1->next;
             free(m2);
         }
+        node->Nlist=NULL;
     }
 }
 
 
 void filterNeighbour(Gnode *H, Gnode *f)
 {
+    // printf("\n Filtering neighbour started");
+    // printf("\n to be filtered %c",f->data);
     Nnode *m1,*m2;
     m1=H->Nlist;
     if(m1!=NULL)
     {
+        
         if(m1->Gadd==f)
         {
             H->Nlist=m1->next;
             free(m1);
         } 
         else
-        {
-            m2=m1;
-            m1=m1->next;
+        {  
+            int i=0;    
             while(1)
             {
+                //  printf("\n %d",i);
+                
+                m2=m1;
+                m1=m1->next;
+                if(m1==NULL)
+                    break;
                 if(m1->Gadd==f )
                 {
+                    // printf("\nInside if");
                     m2->next=m1->next;
                     free(m1);
                     break;
                 }
-                m2=m1;
-                m1=m1->next;
+                i++;
             }
         }      
     }    
@@ -54,51 +64,52 @@ void filterNeighbour(Gnode *H, Gnode *f)
 
 void deleteGnode(Gnode *a)
 {
-    Gnode *mover=start,*premover;
-    if(mover->next==NULL)
+    // printf("\n Inside Delete node function");
+    Gnode *mover=start,*premover=NULL;
+    
+    // printf("\n%c",mover->data);
+    // printf("\nclearNeighbour started");
+    while(mover!=NULL)
     {
-        if(mover==a)
+        // printf("\n Mover data%c",mover->data);
+        // printf("\nFiltering Neighbour started");
+        if(mover!=a)
         {
-            clearNeighbour(a);
-            free(mover);
-            start=NULL;
-        }
-        else
-        {
+            // printf("\n other node detected");
+            
             filterNeighbour(mover,a);
+            // printf("\n filtering over");
         }
+        premover=mover;
+        mover=mover->next;
+        // printf("\n Next node");
+    }
+    
+    // printf("clearNeighbour done");
+    mover=start;
+    premover=NULL;
+
+    if(mover==a)
+    {
+        start=mover->next;
+        clearNeighbour(mover);
+        free(mover);
     }
     else
     {
-        if(mover==a)
+        while(1)
         {
-            clearNeighbour(a);
-            start=mover->next;
-            free(mover);
-        }
-        else{
             premover=mover;
             mover=mover->next;
-            while(mover!=NULL)
+            if(mover==a)
             {
-                if(mover==a)
-                {
-                    clearNeighbour(a);
-                    premover->next=mover->next;
-                    free(mover);
-                    mover=premover->next;
-                }
-                else
-                {
-                    filterNeighbour(mover,a);
-                    premover=mover;
-                    mover=mover->next;
-                }
-                
+                clearNeighbour(mover);
+                premover->next=mover->next;
+                free(mover);
+                break;
             }
-        }
+        }        
     }
-    
     
     
 }
@@ -184,6 +195,9 @@ int main()
     deleteEdge('B','A');
     printGraph(start);
     // printf("\n5");*/
-     //deleteNode('D ');
+    
+     deleteNode('D');
+     
     printGraph(start);
+    
 }
