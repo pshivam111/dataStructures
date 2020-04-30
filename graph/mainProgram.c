@@ -10,7 +10,7 @@ void deapthFirstSearchPrint( Gnode *a)
 }
 int main()
 {
-    edge g1[8]={{'A','B'},{'A','C'},{'B','A'},{'B','C'},{'C','B'},{'D','A'},{'D','B'},{'D','C'}};
+    edge g1[8]={{'A','D'},{'A','C'},{'B','C'},{'B','E'},{'B','D'},{'D','B'},{'E','C'},{'C','A'}};
 
     addEdge(g1[0]);
     addEdge(g1[1]);
@@ -20,10 +20,11 @@ int main()
     addEdge(g1[5]);
     addEdge(g1[6]);
     addEdge(g1[7]);
+
     printGraph(start);
 
-deleteNode('D');
+    deleteNode('D');
 
-printGraph(start);
+    printGraph(start);
 
 }
