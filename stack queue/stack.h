@@ -24,11 +24,11 @@ void push(void *x)
 }
 
 //________________________________________________________________________
-int pop()
+void * pop()
 {
 	if(tOp==NULL)
 	{
-		return -1;
+		return NULL;
 	}
 	else
 	{
@@ -38,4 +38,9 @@ int pop()
 		free(temp);
 		return a;
 	}
+}
+
+int Empty()
+{
+	return (tOp==NULL);
 }

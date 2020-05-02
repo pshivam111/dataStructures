@@ -1,12 +1,35 @@
 #include<stdio.h>
-#include<stack.h>
+#include"stack.h"
 #include<queue.h>
 #include<stdlib.h>
 #include"node.h"
 #include"graphFunctions.h"
+
+void inspect(Gnode *a)
+{
+    Nnode *mover;
+
+    if (a!=NULL)
+    {
+        printf(" %c ",a->data);
+        mover=a->Nlist; 
+        while(mover!=NULL)
+        {   
+            push(mover->Gadd);
+            mover=mover->next;
+        }
+    }    
+}
 void deapthFirstSearchPrint( Gnode *a)
 {
-
+    printf("\n Deapth FIrst Search : ");
+    Gnode *tra;
+    push(a);
+    while(!Empty())
+    {
+        tra=pop();
+        inspect(tra);
+    }
 }
 int main()
 {
@@ -22,9 +45,7 @@ int main()
     addEdge(g1[7]);
 
     printGraph(start);
-
-    deleteNode('D');
-
-    printGraph(start);
+    
+    // deapthFirstSearchPrint(start);
 
 }
