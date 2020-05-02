@@ -3,7 +3,7 @@ import java.util.Scanner;
  class QuickFindUF
 {
     private int id[];
-    public  QuickFindUF(int N) 
+    public QuickFindUF(int N) 
     {
          id = new int[N];
          for(int i=0;i<N;i++)
@@ -22,6 +22,29 @@ import java.util.Scanner;
         for(int i=0;i<id.length;i++)
         if(id[i]==pid) 
             id[i]=qid;
+    }
+}
+
+class QuickFindUFLazy
+{
+
+    private int id[];
+    public QuickFindUFLazy(int N)
+    {
+        for(int i=0;i<N;i++)
+            id[i]=i;
+    }
+    public boolean.connected(int p,int q)
+    {
+        int proot;
+        while(id[p]!=p)
+            p=id[p];
+        while(id[q]!=q)
+            q=id[q];
+        if(p==q)
+            return true;
+        else 
+            return false;
     }
 }
 
