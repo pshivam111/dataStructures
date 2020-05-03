@@ -2,6 +2,7 @@ Gnode *createGnode(char c)
 {
     Gnode *temp =(Gnode *) malloc(sizeof(Gnode));
     temp->data=c;
+    temp->visited=0;
     temp->next=NULL;
     temp->Nlist=NULL;
     return  temp;

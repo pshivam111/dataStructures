@@ -1,34 +1,64 @@
 #include<stdio.h>
 #include"stack.h"
-#include<queue.h>
+#include"queue.h"
 #include<stdlib.h>
 #include"node.h"
 #include"graphFunctions.h"
 
-void inspect(Gnode *a)
+void inspectDFS(Gnode *a)
 {
     Nnode *mover;
 
     if (a!=NULL)
     {
         printf(" %c ",a->data);
+        (a->visited)++;
         mover=a->Nlist; 
         while(mover!=NULL)
         {   
-            push(mover->Gadd);
+            if(mover->Gadd->visited==0)
+                push(mover->Gadd);
             mover=mover->next;
         }
     }    
+}
+void inspectBFS(Gnode *a)
+{
+    Nnode *mover;
+    printf("inside inspectBFS");
+    if (a!=NULL)
+    {
+        printf(" %c ",a->data);
+        (a->visited)++;
+        mover=a->Nlist; 
+        while(mover!=NULL)
+        {   
+            if(mover->Gadd->visited==0)
+                enqueue(mover->Gadd);
+            mover=mover->next;
+        }
+    }    
+}
+void breadthFirstSearchPrint(Gnode *a)
+{
+    printf("\n Breadth First Search");
+    Gnode *tra;
+    enqueue(a);
+    while(!Emptyqueue())
+    {
+        tra=dequeue();
+        inspectBFS(tra);
+    }   
 }
 void deapthFirstSearchPrint( Gnode *a)
 {
     printf("\n Deapth FIrst Search : ");
     Gnode *tra;
     push(a);
-    while(!Empty())
+    while(!Emptystack())
     {
         tra=pop();
-        inspect(tra);
+        inspectDFS(tra);
     }
 }
 int main()
@@ -46,6 +76,6 @@ int main()
 
     printGraph(start);
     
-    // deapthFirstSearchPrint(start);
+    breadthFirstSearchPrint(start);
 
 }

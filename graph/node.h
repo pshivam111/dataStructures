@@ -3,6 +3,7 @@ struct Nnode;
 struct Gnode
 {
     char data;
+    int visited;
     struct Nnode *Nlist;
     struct Gnode *next; 
 };

@@ -24,11 +24,11 @@ void enqueue(void *x)
 	}
 }
 
-int dequeue()
+void *dequeue()
 {
 	if(frOnt==NULL)
 	{
-		return -1;
+		return NULL;
 	}
 	else
 	{
@@ -39,4 +39,9 @@ int dequeue()
 		return a;		
 		
 	}
+}
+
+int Emptyqueue()
+{
+	return (rEar==NULL);
 }

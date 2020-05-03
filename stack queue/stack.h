@@ -40,7 +40,7 @@ void * pop()
 	}
 }
 
-int Empty()
+int Emptystack()
 {
 	return (tOp==NULL);
 }
