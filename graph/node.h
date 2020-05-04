@@ -1,3 +1,11 @@
+/*
+Library for graph implementation in c.
+This file contain node structure.
+
+By Shivam Patil
+email: shivam.patil16@vit.edu
+*/
+
 struct Nnode;
 
 struct Gnode

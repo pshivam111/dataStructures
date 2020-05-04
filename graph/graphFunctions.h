@@ -1,3 +1,11 @@
+/*
+Library for graph implementation in c
+This file contain graph functions.
+By Shivam Patil
+email: shivam.patil16@vit.edu
+*/
+
+//-----------------------------------------------FUNCTION TO CREATE NODE--------------------------------------------
 Gnode *createGnode(char c)
 {
     Gnode *temp =(Gnode *) malloc(sizeof(Gnode));
@@ -7,6 +15,8 @@ Gnode *createGnode(char c)
     temp->Nlist=NULL;
     return  temp;
 }
+
+//---------------------------------------FUNCTION TO GET ADDRESS OF A NODE------------------------------------
 Gnode *getGadd(char c)
 {
     // printf("\n Get address function and function parameter is : %c ", c);
@@ -22,6 +32,8 @@ Gnode *getGadd(char c)
     // printf("\n Get address function over and temp data is : %c", temp->data);
     return temp;
 }
+
+//------------------------------------FUNCTION TO 'MAKE 'B' AS 'A''s NEIGHBOUR---------------------------------
 void addNeighbour(Gnode *a, Gnode *b)
 {
     Nnode *node=(Nnode *)malloc(sizeof(Nnode)),*temp;
@@ -37,16 +49,12 @@ void addNeighbour(Gnode *a, Gnode *b)
         while (temp->next!=NULL)         
             temp=temp->next;
         temp->next=node;
-    }
-    
-    
-    
+    }    
 }
 
+//----------------------------FUNCTION TO REMOVE A PARTICULAR NEIGHBOUR------------------------------
 void filterNeighbour(Gnode *H, Gnode *f)
 {
-    // printf("\n Filtering neighbour started");
-    // printf("\n to be filtered %c",f->data);
     Nnode *m1,*m2;
     m1=H->Nlist;
     if(m1!=NULL)
@@ -61,16 +69,13 @@ void filterNeighbour(Gnode *H, Gnode *f)
         {  
             int i=0;    
             while(1)
-            {
-                //  printf("\n %d",i);
-                
+            {              
                 m2=m1;
                 m1=m1->next;
                 if(m1==NULL)
                     break;
                 if(m1->Gadd==f )
                 {
-                    // printf("\nInside if");
                     m2->next=m1->next;
                     free(m1);
                     break;
@@ -81,10 +86,9 @@ void filterNeighbour(Gnode *H, Gnode *f)
     }    
 }
 
-
+//--------------------------------------FUNCTION TO DELETE ALL NEIGHBOUR-------------------------------------
 void clearNeighbour(Gnode *node)
 {
-    // printf("\n Clear neighbour function called ");
     if(node!=NULL)
     {
         Nnode *m1,*m2;
@@ -99,30 +103,19 @@ void clearNeighbour(Gnode *node)
     }
 }
 
+//----------------------------------------FUNCTION TO DELETE A NODE------------------------------------------------
 void deleteGnode(Gnode *a)
 {
-    // printf("\n Inside Delete node function");
     Gnode *mover=start,*premover=NULL;
-    
-    // printf("\n%c",mover->data);
-    // printf("\nclearNeighbour started");
     while(mover!=NULL)
     {
-        // printf("\n Mover data%c",mover->data);
-        // printf("\nFiltering Neighbour started");
         if(mover!=a)
-        {
-            // printf("\n other node detected");
-            
+        {            
             filterNeighbour(mover,a);
-            // printf("\n filtering over");
         }
         premover=mover;
         mover=mover->next;
-        // printf("\n Next node");
     }
-    
-    // printf("clearNeighbour done");
     mover=start;
     premover=NULL;
 
@@ -151,34 +144,22 @@ void deleteGnode(Gnode *a)
     
 }
 
+//----------------------------------------FUNCTION TO DELETE A NODE------------------------------------------------ 
 void deleteNode(char c)
 {
     deleteGnode(getGadd(c));
 }
 
-
+//--------------------------FUNCTION TO DELETE A PARTICULAR EDGE FROM GRAP-----------------------
 void deleteEdge(char from, char to)
 {
-    // printf("\n from %c  to %c",from,to );
-    // printf("\n Edge deletion function");
-
     Gnode *temp=getGadd(from);
     Gnode *toAdd=getGadd(to);
     if(temp==NULL)
         printf(" Address is NULL");
-    // printf("\n Address recieved from getGadd function");
-    // printf("\n temp data %c",temp->data);
-    // printf("\n toAdd data %c",toAdd->data);
-    
 
     Nnode *mover=temp->Nlist;
-    /*
-    if (mover==NULL)
-        printf("\n Its NULL");
-    else
-        printf("\n Not NULL");
-    */
-    // printf("\n delay");
+
     if(mover->next ==NULL)
     {
         free(mover); temp->Nlist=NULL;
@@ -186,16 +167,15 @@ void deleteEdge(char from, char to)
     else
     {    
         while (mover->next->Gadd->data!=to)
-        {
-            
+        {  
             mover=mover->next;
         }
         Nnode *del=mover->next;
         mover->next=mover->next->next;
         free(del); 
     }   
-}
 
+}//----------------------------------A SUB FUNCTION ----------------------------------------------------------
 void attachGnode(Gnode *node)
 {
     if (start==NULL)
@@ -250,13 +230,6 @@ void  addEdge(edge e)
     
     addNeighbour(firstnode,secondnode);
 
-    //if it exist then store its address if dosen exist then create node 
-    //and store data.
-    //search for a node with data =e.to
-    //if it exists then store its address if dosent exist then creat node
-    //and store data
-    
-    //if both are not null then add to node in the neighbour list of from node
 }
 
 void printGraph(Gnode *temp)
@@ -275,5 +248,60 @@ void printGraph(Gnode *temp)
             ntemp=ntemp->next;
         }
         temp=temp->next;
+    }
+}
+
+void inspectDFS(Gnode *a)
+{
+    Nnode *mover;
+    if (a!=NULL)
+    {   printf(" %c ",a->data);
+        (a->visited)++;
+        mover=a->Nlist; 
+        while(mover!=NULL)
+        {   
+            if(mover->Gadd->visited==0)
+                push(mover->Gadd);
+            mover=mover->next;
+        }
+    }    
+}
+void inspectBFS(Gnode *a)
+{
+    Nnode *mover;
+    if (a!=NULL)
+    {
+        printf(" %c ",a->data);
+        (a->visited)++;
+        mover=a->Nlist; 
+        while(mover!=NULL)
+        {   
+            if(mover->Gadd->visited==0)
+                {
+                    enqueue(mover->Gadd);                
+                }
+            mover=mover->next;
+        }
+    }    
+}
+void breadthFirstSearchPrint(Gnode *a)
+{
+    printf("\n Breadth First Search");
+    Gnode *tra;
+    enqueue(a);
+    while(!Emptyqueue())
+    {   tra=dequeue();
+        inspectBFS(tra);
+    }   
+}
+void deapthFirstSearchPrint( Gnode *a)
+{
+    printf("\n Deapth FIrst Search : ");
+    Gnode *tra;
+    push(a);
+    while(!Emptystack())
+    {
+        tra=pop();
+        inspectDFS(tra);
     }
 }
