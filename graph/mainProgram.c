@@ -25,7 +25,7 @@ void inspectDFS(Gnode *a)
 void inspectBFS(Gnode *a)
 {
     Nnode *mover;
-    printf("inside inspectBFS");
+    // printf(" \n Inside inspectBFS");
     if (a!=NULL)
     {
         printf(" %c ",a->data);
@@ -33,31 +33,35 @@ void inspectBFS(Gnode *a)
         mover=a->Nlist; 
         while(mover!=NULL)
         {   
-            printf("\n inside mover");
+            // printf("\n inside mover");
             if(mover->Gadd->visited==0)
                 {
-                    printf("\n New node %c :",mover->Gadd->data);
-                enqueue(mover->Gadd);
-                printf("\n Q size : %d ",qSize());
+                    enqueue(mover->Gadd);
+                    // printf("\n New node %c :",mover->Gadd->data);
+                
+                // printf("\n Q size : %d ",qSize());
                 }
             mover=mover->next;
             // printf("\n Q size : %d ",qSize());
         }
     }    
-    printf("\n First node completeluy inspected");
-    printf("\n Q size : %d ",qSize());
+    // printf("\n First node completeluy inspected");
+    // printf("\n Q size : %d ",qSize());
 }
 void breadthFirstSearchPrint(Gnode *a)
 {
     printf("\n Breadth First Search");
     Gnode *tra;
     enqueue(a);
-    printf("\n enqueue done");
+    // printf("\n Q size : %d ",qSize());
+    // printf("\n Emptyqueue : %d",!Emptyqueue());
+    // printf("\n enqueue done");
     while(!Emptyqueue())
-    {printf("\n Inside inspection while");
+    {//printf("\n Inside inspection while");
         tra=dequeue();
+        // printf("\n Q size : %d ",qSize());
         inspectBFS(tra);
-        printf("\n Q size : %d ",qSize());
+        // printf("\n Q size : %d ",qSize());
     }   
 }
 void deapthFirstSearchPrint( Gnode *a)
@@ -86,7 +90,8 @@ int main()
 
     printGraph(start);
     
-    // deapthFirstSearchPrint(start);
-    breadthFirstSearchPrint(start);
-
+     deapthFirstSearchPrint(start);
+    // breadthFirstSearchPrint(start);
+    
+    
 }
