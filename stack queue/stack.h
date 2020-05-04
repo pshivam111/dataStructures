@@ -24,7 +24,7 @@ void push(void *x)
 }
 
 //________________________________________________________________________
-void * pop()
+void *pop()
 {
 	if(tOp==NULL)
 	{
@@ -39,6 +39,8 @@ void * pop()
 		return a;
 	}
 }
+
+//int stackSize()
 
 int Emptystack()
 {

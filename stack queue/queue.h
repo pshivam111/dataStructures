@@ -15,11 +15,11 @@ void enqueue(void *x)
 	}
 	else
 	{
-		struct qnode *temp=(struct qnode*) malloc(sizeof(struct qnode));
-		temp->next=NULL;
-		temp->data=x;
-		rEar->next=temp;
-		rEar=temp;
+		struct qnode *te_mp=(struct qnode*) malloc(sizeof(struct qnode));
+		te_mp->next=NULL;
+		te_mp->data=x;
+		rEar->next=te_mp;
+		rEar=te_mp;
 		
 	}
 }
@@ -32,10 +32,12 @@ void *dequeue()
 	}
 	else
 	{
-		struct qnode *temp=frOnt;
+		struct qnode *teMp=frOnt;
 		frOnt=frOnt->next;
-		void *a=temp->data;
-		free(temp);
+		if(frOnt==NULL)
+			rEar=NULL;
+		void *a=teMp->data;
+		free(teMp);
 		return a;		
 		
 	}
@@ -43,5 +45,19 @@ void *dequeue()
 
 int Emptyqueue()
 {
-	return (rEar==NULL);
+	return (frOnt==NULL||rEar==NULL);
+}
+
+int qSize()
+{
+struct qnode *tempO=frOnt;
+int i=0;
+while(tempO!=NULL)
+	{
+		
+		i++;
+//		printf("\n Variable i : %d",i);
+		tempO=tempO->next;
+	}
+return i;
 }
