@@ -1,11 +1,11 @@
 #include<stdio.h>
-#include<iostream>
-#include"stack.h"
-#include"queue.h"
-#include<stdlib.h>
+
+#include"stack.hpp"
+#include"queue.hpp"
+#include <cstdlib>
 #include"node.h"
 #include"graphFunctions.h"
-using namespace std;
+
 int main()
 {
     edge g1[8]={{'A','D'},{'A','C'},{'B','C'},{'B','E'},{'B','D'},{'D','B'},{'E','C'},{'C','A'}};

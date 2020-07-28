@@ -8,7 +8,7 @@ email: shivam.patil16@vit.edu
 //-----------------------------------------------FUNCTION TO CREATE NODE--------------------------------------------
 Gnode *createGnode(char c)
 {
-    Gnode *temp =(Gnode *) malloc(sizeof(Gnode));
+    Gnode *temp = new Gnode();
     temp->data=c;
     temp->visited=0;
     temp->next=NULL;
@@ -36,7 +36,7 @@ Gnode *getGadd(char c)
 //------------------------------------FUNCTION TO 'MAKE 'B' AS 'A''s NEIGHBOUR---------------------------------
 void addNeighbour(Gnode *a, Gnode *b)
 {
-    Nnode *node=(Nnode *)malloc(sizeof(Nnode)),*temp;
+    Nnode *node= new Nnode(),*temp;
     node->Gadd=b;
     node->next=NULL;
 
@@ -290,7 +290,7 @@ void breadthFirstSearchPrint(Gnode *a)
     Gnode *tra;
     enqueue(a);
     while(!Emptyqueue())
-    {   tra=dequeue();
+    {   tra=(Gnode *)dequeue();
         inspectBFS(tra);
     }   
 }
@@ -301,7 +301,7 @@ void deapthFirstSearchPrint( Gnode *a)
     push(a);
     while(!Emptystack())
     {
-        tra=pop();
+        tra=(Gnode *)pop();
         inspectDFS(tra);
     }
 }
